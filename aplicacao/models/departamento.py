@@ -8,14 +8,14 @@ class DepartamentoManager(models.Manager):
 		result = Departamento.objects.get(pk=idDepartamento)
 		return result
 
-	''' Retrieving all departaments '''
-	def obter_departamentos(self):
-    		result = Departamento.all()
+	''' Retrieving all departaments (departament) '''
+	def obter_todos_departamentos(self):
+		results = Departamento.objects.all()
 		return results
 
-	''' Retrieving all departaments que contem a sigla '''
+	''' Retrieving all departaments que contem a sigla  '''
 	def obter_departamentos_pela_sigla(self, sigla):
-    		result = objects.get(headline__contains=sigla)
+		results = Departamento.objects.get(sigla__contains='FIN')
 		return results
 
 

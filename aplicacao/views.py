@@ -3,16 +3,9 @@ from django.http import HttpResponse, JsonResponse
 from .models.pessoa import Pessoa
 from django.template import loader
 
-def indice(request):
-	return HttpResponse("Hello, world. asdasdas")
 
-def pessoa(request, idpessoa):
-	p = Pessoa.objects.get(pk=idpessoa)
-	dados = {'pessoa':p}
-	return render(request, 'pessoa/detalhar.html', dados)
-
-def lista_pessoas(request):
-	# Aqui é o modelo
+def index(request):
+    	# Aqui é o modelo
 	lista_p = Pessoa.objects.obter_pessoas_adultas()
 	dados = { 'listapessoas' : lista_p }
 
@@ -21,6 +14,31 @@ def lista_pessoas(request):
 	return HttpResponse(
 		template.render(dados, request)
 	)
+
+def create(request):
+     return render(request, 'pessoa/create.html')
+ 
+''' store
+show
+edit
+update
+destroy '''
+
+def pessoa(request, idpessoa):
+	p = Pessoa.objects.get(pk=idpessoa)
+	dados = {'pessoa':p}
+	return render(request, 'pessoa/detalhar.html', dados)
+
+
+
+
+
+
+
+
+
+
+
 
 def testeJson(request):
 	payload = {'lista':[
