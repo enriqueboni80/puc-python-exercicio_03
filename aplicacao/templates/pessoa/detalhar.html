@@ -3,4 +3,10 @@
 
 {{pessoa.nome}} {{pessoa.sobrenome}} tem {{pessoa.idade}} anos!
 
+<form action="{% url 'pessoa.delete' pessoa.id %}" method="post">
+    {% csrf_token %}
+    <input type="hidden" name="_method" value="delete">
+    <input type="submit" value="Delete">
+</form>
+
 {% endblock %}
