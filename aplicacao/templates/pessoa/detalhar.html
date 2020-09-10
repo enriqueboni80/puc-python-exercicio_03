@@ -8,5 +8,10 @@
     <input type="hidden" name="_method" value="delete">
     <input type="submit" value="Delete">
 </form>
+<form action="{% url 'pessoa.edit' pessoa.id %}" method="post">
+    {% csrf_token %}
+    <input type="hidden" name="_method" value="delete">
+    <input type="submit" value="Edit">
+</form>
 
 {% endblock %}
