@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block xpto %}
+
+{{departamento.sigla}} - {{departamento.descricao}}
+
+<form action="{% url 'departamento.delete' departamento.id %}" method="post">
+    {% csrf_token %}
+    <input type="hidden" name="_method" value="delete">
+    <input type="submit" value="Delete">
+</form>
+<form action="{% url 'departamento.edit' departamento.id %}" method="post">
+    {% csrf_token %}
+    <input type="hidden" name="_method" value="edit">
+    <input type="submit" value="Edit">
+</form>
+
+{% endblock %}

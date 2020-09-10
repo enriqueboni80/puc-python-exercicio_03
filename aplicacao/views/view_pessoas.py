@@ -1,10 +1,10 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse, JsonResponse
-from .models.pessoa import Pessoa
+from ..models.pessoa import Pessoa
 from django.template import loader
 
 
-""" return HttpResponse(request.POST["pessoa_id"]) """
+""" return HttpResponse("Chegou aqui") """
 
 def index(request):
 
@@ -14,10 +14,9 @@ def index(request):
 
 
 def create(request):
-    dados = {
-        "form_action" : "pessoa.store"
-    }
-    return render(request, "pessoa/create.html", dados)
+    dados = {"form_action": "pessoa.store"}
+    return render(request, "pessoa/form.html", dados)
+
 
 def store(request):
     if request.method == "POST":
@@ -41,11 +40,9 @@ def show(request, idPessoa):
 
 def edit(request, idPessoa):
     p = Pessoa.objects.get(pk=idPessoa)
-    dados = {
-        "pessoa": p,
-        "form_action" : "pessoa.update"
-        }
-    return render(request, "pessoa/create.html", dados)
+    dados = {"pessoa": p, "form_action": "pessoa.update"}
+    return render(request, "pessoa/form.html", dados)
+
 
 def update(request):
     idPessoa = request.POST["_pessoa_id"]
@@ -59,20 +56,8 @@ def update(request):
         escolaridade=request.POST["escolaridade"],
     )
     return redirect("index")
-    
-    
+
+
 def destroy(request, idPessoa):
     Pessoa.objects.get(pk=idPessoa).delete()
     return redirect("index")
-
-
-""" def testeJson(request, idPessoa):
-    payload = {
-        "lista": [
-            {"nome": "matheus", "sobrenome": "souza"},
-            {"nome": "pedro", "sobrenome": "silva"},
-        ]
-    }
-
-    return JsonResponse(payload) """
-

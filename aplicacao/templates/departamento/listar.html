@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block xpto %}
+
+<a href="./departamento/create/">Novo</a>
+
+	{% if listaDepartamentos %}
+		<h3>Foram encontradas {{ listaDepartamentos | length }} departamentos!</h3>
+		<ul>
+		{% for depto in listaDepartamentos %}
+			<li><a href="/aplicacao/departamento/{{ depto.id }}/">{{ depto.sigla }} - {{ depto.descricao }}</a></li>
+		{% endfor %}
+		</ul>
+	{% else %}
+		<p>Não há pessoas cadastradas.</p>
+	{% endif %}
+
+{% endblock %}
