@@ -24,7 +24,7 @@ class Pessoa(models.Model):
 		Departamento,
 		related_name='hist_pessoa_depto')
 
-	depto_chefia = models.OneToOneField(
+	depto_chefia = models.ForeignKey(
 		Departamento,
 		on_delete=models.RESTRICT,
 		null=True,

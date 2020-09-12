@@ -24,7 +24,7 @@ class Departamento(models.Model):
 	descricao = models.CharField(max_length=30)
  
 	def __str__(self):
-		return f"{self.descricao}"
+		return f"{self.sigla}"
 
 	objects = DepartamentoManager()
 
