@@ -7,7 +7,7 @@
 		<h3>Foram encontradas {{ listaDepartamentos | length }} departamentos!</h3>
 		<ul>
 		{% for depto in listaDepartamentos %}
-			<li><a href="/aplicacao/departamento/{{ depto.id }}/">{{ depto.sigla }} - {{ depto.descricao }}</a></li>
+			<li><a href="/departamento/{{ depto.id }}/">{{ depto.sigla }} - {{ depto.descricao }}</a></li>
 		{% endfor %}
 		</ul>
 	{% else %}

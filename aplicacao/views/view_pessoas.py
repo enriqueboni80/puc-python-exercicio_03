@@ -37,7 +37,7 @@ def store(request):
         escolaridade=request.POST["escolaridade"],
     )
     pessoa.save()
-    return redirect("index")
+    return redirect("pessoa.index")
 
 
 def show(request, idPessoa):
@@ -72,7 +72,7 @@ def update(request, idPessoa):
         depto_chefia_id=request.POST["depto_chefia"],
         escolaridade=request.POST["escolaridade"],
     )
-    return redirect("index")
+    return redirect("pessoa.index")
 
 
 def destroy(request, idPessoa):
