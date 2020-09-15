@@ -1,17 +1,40 @@
-{% extends 'base.html' %}
+{% extends 'layout/app.html' %}
 {% block xpto %}
 
-<a href="./departamento/create/">Novo</a>
-
-	{% if listaDepartamentos %}
-		<h3>Foram encontradas {{ listaDepartamentos | length }} departamentos!</h3>
-		<ul>
-		{% for depto in listaDepartamentos %}
-			<li><a href="/departamento/{{ depto.id }}/">{{ depto.sigla }} - {{ depto.descricao }}</a></li>
-		{% endfor %}
-		</ul>
-	{% else %}
-		<p>Não há pessoas cadastradas.</p>
-	{% endif %}
-
+<div class="row justify-content-md-center">
+	<div class="col-6 grid-margin stretch-card">
+		<div class="card">
+			<div class="card-body">
+				<div class="row">
+					<div class="col-6"><h4 class="card-title">Lista de Departamentos</h4></div>
+					<div class="col-6" style="text-align:right"><a href="./departamento/create/" type="button" class="btn btn-success">Novo</a></div>
+				</div>
+				{% if listaDepartamentos %}
+						<div class="table-responsive">
+							<table class="table table-hover">
+								<thead>
+									<tr>
+										<th>#Id</th>
+										<th>Sigla</th>
+										<th>Descrição</th>
+									</tr>
+								</thead>
+								<tbody>
+								{% for depto in listaDepartamentos %}
+									<tr style="cursor:pointer" onclick="window.location='/departamento/{{ depto.id }}'">
+										<td>{{ depto.id }}</td>
+										<td>{{ depto.sigla }}</td>
+										<td>{{ depto.descricao }}</td>
+									</tr>
+								{% endfor %}
+								</tbody>
+							</table>
+						</div>
+				{% else %}
+					<p>Não há pessoas cadastradas.</p>
+				{% endif %}
+			</div>
+		</div>
+	</div>
+</div>
 {% endblock %}

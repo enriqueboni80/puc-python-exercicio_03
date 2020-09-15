@@ -13,7 +13,7 @@ from ..forms import RawPessoaForm
 def index(request):
     lista_p = Pessoa.objects.all()
     dados = {
-        "listapessoas": lista_p,
+        "listaPessoas": lista_p,
     }
     return render(request, "pessoa/listar.html", dados)
 
@@ -77,4 +77,4 @@ def update(request, idPessoa):
 
 def destroy(request, idPessoa):
     Pessoa.objects.get(pk=idPessoa).delete()
-    return redirect("index")
+    return redirect("pessoa.index")

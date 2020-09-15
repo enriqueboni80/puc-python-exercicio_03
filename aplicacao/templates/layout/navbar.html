@@ -1,0 +1,87 @@
+    {% load static %}
+    <div class="horizontal-menu">
+      <nav class="navbar top-navbar col-lg-12 col-12 p-0">
+        <div class="container-fluid">
+          <div class="navbar-menu-wrapper d-flex align-items-center justify-content-between">
+            <ul class="navbar-nav navbar-nav-left">
+            </ul>
+            <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
+                <a class="navbar-brand brand-logo" href="{% url 'index' %}">Pyhton: PucMinas</a>
+                <a class="navbar-brand brand-logo-mini" href="{% url 'index' %}">Pyhton: PucMinas</a>
+            </div>
+            <ul class="navbar-nav navbar-nav-right">
+            </ul>
+            <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button" data-toggle="horizontal-menu-toggle">
+              <span class="mdi mdi-menu"></span>
+            </button>
+          </div>
+        </div>
+      </nav>
+      <nav class="bottom-navbar">
+        <div class="container">
+            <ul class="nav page-navigation">
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'index' %}">
+                  <i class="mdi mdi-file-document-box menu-icon"></i>
+                  <span class="menu-title">Dashboard</span>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'pessoa.index' %}">
+                  <i class="mdi mdi-account-multiple menu-icon"></i>
+                  <span class="menu-title">Pessoas</span>
+                </a>
+              </li>
+              <li class="nav-item">
+                  <a href="{% url 'departamento.index' %}" class="nav-link">
+                    <i class="mdi mdi-cube-outline menu-icon"></i>
+                    <span class="menu-title">Departamentos</span>
+                    <i class="menu-arrow"></i>
+                  </a>
+              </li>
+              <li class="nav-item">
+                  <a onClick="alert('ainda não funciona')" href="#" class="nav-link">
+                    <i class="mdi mdi-finance menu-icon"></i>
+                    <span class="menu-title">Charts</span>
+                    <i class="menu-arrow"></i>
+                  </a>
+              </li>
+              <li class="nav-item">
+                  <a onClick="alert('ainda não funciona')" href="#" class="nav-link">
+                    <i class="mdi mdi-grid menu-icon"></i>
+                    <span class="menu-title">Tables</span>
+                    <i class="menu-arrow"></i>
+                  </a>
+              </li>
+              <li class="nav-item">
+                  <a onClick="alert('ainda não funciona')" href="#" class="nav-link">
+                    <i class="mdi mdi-emoticon menu-icon"></i>
+                    <span class="menu-title">Icons</span>
+                    <i class="menu-arrow"></i>
+                  </a>
+              </li>
+              <li class="nav-item">
+                  <a onClick="alert('ainda não funciona')" href="#" class="nav-link">
+                    <i class="mdi mdi-codepen menu-icon"></i>
+                    <span class="menu-title">Sample Pages</span>
+                    <i class="menu-arrow"></i>
+                  </a>
+                  <div class="submenu">
+                      <ul class="submenu-item">
+                          {% comment %} <li class="nav-item"><a class="nav-link" href="../../pages/samples/login.html">Login</a></li>
+                          <li class="nav-item"><a class="nav-link" href="../../pages/samples/login-2.html">Login 2</a></li>
+                          <li class="nav-item"><a class="nav-link" href="../../pages/samples/register.html">Register</a></li>
+                          <li class="nav-item"><a class="nav-link" href="../../pages/samples/register-2.html">Register 2</a></li>
+                          <li class="nav-item"><a class="nav-link" href="../../pages/samples/lock-screen.html">Lockscreen</a></li> {% endcomment %}
+                      </ul>
+                  </div>
+              </li>
+              <li class="nav-item">
+                  <a onClick="alert('ainda não funciona')" href="#" class="nav-link">
+                    <i class="mdi mdi-file-document-box-outline menu-icon"></i>
+                    <span class="menu-title">Documentation</span></a>
+              </li>
+            </ul>
+        </div>
+      </nav>
+    </div>
