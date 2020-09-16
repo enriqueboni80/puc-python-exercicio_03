@@ -1,17 +1,13 @@
 {% extends 'layout/app.html' %}
 {% block xpto %}
 
+
 <div class="row justify-content-md-center">
 	<div class="col-md-6 grid-margin stretch-card">
 		<div class="card">
 			<div class="card-body">
-				<h4 class="card-title">Cadastro de departamento</h4>
-				{% if qtdDepartamentos <= 0 %}
-					<div style="color:red; margin-bottom:30px">
-						<h6> * Primeiro cadastre um departamento </h6> 
-					</div>
-				{% endif %}
-				<form class="forms-sample" action="{% url 'pessoa.store' %}" method="post">
+				<h4 class="card-title">Cadastro de Tipos de Pagamento</h4>
+				<form class="forms-sample" action="{% url 'tipo-pagamento.store' %}" method="post">
 					{% csrf_token %}
 					{{ form.as_p }}
 					<button type="submit" class="btn btn-primary mr-2">Gravar</button>

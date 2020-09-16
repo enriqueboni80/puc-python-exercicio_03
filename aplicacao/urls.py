@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import view_home, view_pessoas, view_departamentos
+from .views import view_home, view_pessoas, view_departamentos, view_tipoPagamentos
 
 urlpatterns = [
     path("", view_home.index, name="index"),
@@ -17,7 +17,15 @@ urlpatterns = [
     path("departamento/<int:idDepartamento>/edit", view_departamentos.edit, name="departamento.edit"),
     path("departamento/<int:idDepartamento>/update", view_departamentos.update, name="departamento.update"),
     path("departamento/<int:idDepartamento>/delete", view_departamentos.destroy, name="departamento.delete"),
+    path("tipo-pagamento", view_tipoPagamentos.index, name="tipo-pagamento.index"),
+    path("tipo-pagamento/create/", view_tipoPagamentos.create, name="tipo-pagamento.create"),
+    path("tipo-pagamento/store/", view_tipoPagamentos.store, name="tipo-pagamento.store"),
+    path("tipo-pagamento/<int:id>/", view_tipoPagamentos.show, name="tipo-pagamento.show"),
+    path("tipo-pagamento/<int:id>/edit", view_tipoPagamentos.edit, name="tipo-pagamento.edit"),
+    path("tipo-pagamento/<int:id>/update", view_tipoPagamentos.update, name="tipo-pagamento.update"),
+    path("tipo-pagamento/<int:id>/delete", view_tipoPagamentos.destroy, name="tipo-pagamento.delete"),
     
+
 ]
 
 """ MODELOS DOS VERBOS

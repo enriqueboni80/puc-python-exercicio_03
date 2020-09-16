@@ -18,11 +18,11 @@ def index(request):
     return render(request, "pessoa/listar.html", dados)
 
 
-def create(request):
-    lista_depto = Departamento.objects.all()
+def create(request):  
     form = RawPessoaForm(request.POST or None)
     dados = {
         "form": form,
+        "qtdDepartamentos": Departamento.objects.count()
     }
     return render(request, "pessoa/create.html", dados)
 

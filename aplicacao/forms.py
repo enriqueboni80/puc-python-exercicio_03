@@ -6,6 +6,11 @@ from .models.pessoa import Pessoa
 class RawDepartamentoForm(forms.Form):
     sigla = forms.CharField()
     descricao = forms.CharField()
+    
+    
+class RawTipoPagamentoForm(forms.Form):
+    nome = forms.CharField()
+    descricao = forms.CharField()
 
 
 class RawPessoaForm(forms.Form):
