@@ -6,8 +6,8 @@
 		<div class="card">
 			<div class="card-body">
 				<div class="row">
-					<div class="col-6"><h4 class="card-title">Tipos de Pagamento</h4></div>
-					<div class="col-6" style="text-align:right"><a href="./tipo-pagamento/create/" type="button" class="btn btn-success">Novo</a></div>
+					<div class="col-6"><h4 class="card-title">Tipos de Operações</h4></div>
+					<div class="col-6" style="text-align:right"><a href="{% url 'tipo-operacao.create' %}" type="button" class="btn btn-success">Novo</a></div>
 				</div>
 				{% if returnedObjectsList %}
 						<div class="table-responsive">
@@ -21,7 +21,7 @@
 								</thead>
 								<tbody>
 								{% for object in returnedObjectsList %}
-									<tr style="cursor:pointer" onclick="window.location='/tipo-pagamento/{{ object.id }}'">
+									<tr style="cursor:pointer" onclick="window.location='{% url 'tipo-operacao.show' object.id %}'">
 										<td>{{ object.id }}</td>
 										<td>{{ object.nome }}</td>
 										<td>{{ object.descricao }}</td>

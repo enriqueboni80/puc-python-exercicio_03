@@ -8,7 +8,7 @@ class RawDepartamentoForm(forms.Form):
     descricao = forms.CharField()
     
     
-class RawTipoPagamentoForm(forms.Form):
+class RawTipoOperacaoForm(forms.Form):
     nome = forms.CharField()
     descricao = forms.CharField()
 

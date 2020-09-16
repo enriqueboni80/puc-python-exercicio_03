@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import view_home, view_pessoas, view_departamentos, view_tipoPagamentos
+from .views import view_home, view_pessoas, view_departamentos, view_tipoOperacoes
 
 urlpatterns = [
     path("", view_home.index, name="index"),
@@ -17,13 +17,13 @@ urlpatterns = [
     path("departamento/<int:idDepartamento>/edit", view_departamentos.edit, name="departamento.edit"),
     path("departamento/<int:idDepartamento>/update", view_departamentos.update, name="departamento.update"),
     path("departamento/<int:idDepartamento>/delete", view_departamentos.destroy, name="departamento.delete"),
-    path("tipo-pagamento", view_tipoPagamentos.index, name="tipo-pagamento.index"),
-    path("tipo-pagamento/create/", view_tipoPagamentos.create, name="tipo-pagamento.create"),
-    path("tipo-pagamento/store/", view_tipoPagamentos.store, name="tipo-pagamento.store"),
-    path("tipo-pagamento/<int:id>/", view_tipoPagamentos.show, name="tipo-pagamento.show"),
-    path("tipo-pagamento/<int:id>/edit", view_tipoPagamentos.edit, name="tipo-pagamento.edit"),
-    path("tipo-pagamento/<int:id>/update", view_tipoPagamentos.update, name="tipo-pagamento.update"),
-    path("tipo-pagamento/<int:id>/delete", view_tipoPagamentos.destroy, name="tipo-pagamento.delete"),
+    path("tipo-operacao", view_tipoOperacoes.index, name="tipo-operacao.index"),
+    path("tipo-operacao/create/", view_tipoOperacoes.create, name="tipo-operacao.create"),
+    path("tipo-operacao/store/", view_tipoOperacoes.store, name="tipo-operacao.store"),
+    path("tipo-operacao/<int:id>/", view_tipoOperacoes.show, name="tipo-operacao.show"),
+    path("tipo-operacao/<int:id>/edit", view_tipoOperacoes.edit, name="tipo-operacao.edit"),
+    path("tipo-operacao/<int:id>/update", view_tipoOperacoes.update, name="tipo-operacao.update"),
+    path("tipo-operacao/<int:id>/delete", view_tipoOperacoes.destroy, name="tipo-operacao.delete"),
     
 
 ]
