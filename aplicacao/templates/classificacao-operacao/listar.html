@@ -1,0 +1,40 @@
+{% extends 'layout/app.html' %}
+{% block xpto %}
+
+<div class="row justify-content-md-center">
+	<div class="col-6 grid-margin stretch-card">
+		<div class="card">
+			<div class="card-body">
+				<div class="row">
+					<div class="col-6"><h4 class="card-title">Classe das Operações</h4></div>
+					<div class="col-6" style="text-align:right"><a href="{% url 'classificacao-operacao.create' %}" type="button" class="btn btn-success">Novo</a></div>
+				</div>
+				{% if returnedObjectsList %}
+						<div class="table-responsive">
+							<table class="table table-hover">
+								<thead>
+									<tr>
+										<th>#Id</th>
+										<th>Nome</th>
+										<th>Descrição</th>
+									</tr>
+								</thead>
+								<tbody>
+								{% for object in returnedObjectsList %}
+									<tr style="cursor:pointer" onclick="window.location='{% url 'classificacao-operacao.show' object.id %}'">
+										<td>{{ object.id }}</td>
+										<td>{{ object.nome }}</td>
+										<td>{{ object.descricao }}</td>
+									</tr>
+								{% endfor %}
+								</tbody>
+							</table>
+						</div>
+				{% else %}
+					<p>Não há pessoas cadastradas.</p>
+				{% endif %}
+			</div>
+		</div>
+	</div>
+</div>
+{% endblock %}
