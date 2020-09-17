@@ -1,6 +1,9 @@
 from django import forms
 from .models.departamento import Departamento
 from .models.pessoa import Pessoa
+from .models.classificacaoOperacao import ClassificacaoOperacao
+from .models.tipoOperacao import TipoOperacao
+from .models.operacaoFinanceira import OperacaoFinanceiraEntrada
 
 
 class RawDepartamentoForm(forms.Form):
@@ -32,4 +35,19 @@ class RawPessoaForm(forms.Form):
             ("ES", "Ensino Superior"),
         ]
     )
+    
+class RawOperacaoFinanceiraEntradaForm(forms.Form):
+    valor = forms.FloatField()
+    descricao = forms.CharField()
+    classificao_operacao = forms.ModelChoiceField(queryset=ClassificacaoOperacao.objects.all())
+    tipo_operacao = forms.ModelChoiceField(queryset=TipoOperacao.objects.all())
+    data_previsao = forms.DateField()
+    data_recebimento = forms.DateField()
+    situacao = forms.ChoiceField(
+        choices=[
+            ('1','Recebido'),
+            ('2','A Receber'),
+        ]
+    )
+    
 

@@ -1,0 +1,59 @@
+{% extends 'layout/app.html' %}
+{% block xpto %}
+
+<div class="row justify-content-md-center">
+	<div class="col-md-8 grid-margin stretch-card">
+		<div class="card">
+			<div class="card-body">
+				<h4 class="card-title">Operações</h4>
+                    <div class='row'>
+                        <div class='col-4'><h3>#Id: </h3></div>
+                        <div class='col-8'><h3>{{returnedObject.id}}</h3></div>
+                    </div>
+                    <div class='row'>
+                        <div class='col-4'><h3>Valor: </h3></div>
+                        <div class='col-8'><h3>{{returnedObject.valor}}</h3></div>
+                    </div>
+                    <div class='row'>
+                        <div class='col-4'><h3>Descrição: </h3></div>
+                        <div class='col-8'><h3>{{returnedObject.descricao}}</h3></div>
+                    </div>
+                    <div class='row'>
+                        <div class='col-4'><h3>Classificação da Operação: </h3></div>
+                        <div class='col-8'><h3>{{returnedObject.classificao_operacao}}</h3></div>
+                    </div>
+                    <div class='row'>
+                        <div class='col-4'><h3>tipo de Operação: </h3></div>
+                        <div class='col-8'><h3>{{returnedObject.tipo_operacao}}</h3></div>
+                    </div>
+                    <div class='row'>
+                        <div class='col-4'><h3>Data Previsão: </h3></div>
+                        <div class='col-8'><h3>{{returnedObject.data_previsao}}</h3></div>
+                    </div>
+                    <div class='row'>
+                        <div class='col-4'><h3>Data Previsão: </h3></div>
+                        <div class='col-8'><h3>{{returnedObject.data_recebimento}}</h3></div>
+                    </div>
+                    <div class='row'>
+                        <div class='col-4'><h3>Situação: </h3></div>
+                        <div class='col-8'><h3>{{returnedObject.situacao}}</h3></div>
+                    </div>
+                    <div class='row justify-content-md-center' style="margin-top:30px">
+                        <div style="margin-right:10px">
+                            <form action="{% url 'operacao-financeira-entrada.edit' returnedObject.id %}" method="post">
+                                {% csrf_token %}
+                                <button type="submit" value="edit" class="btn btn-warning btn-md">Editar</button>
+                            </form>
+                        </div>
+                        <div>
+                            <form action="{% url 'operacao-financeira-entrada.delete' returnedObject.id %}" method="post">
+                                {% csrf_token %}
+                                <button type="submit" value="Delete" class="btn btn-danger btn-md">Deletar</button>
+                            </form>
+                        </div>
+                    </div>
+			</div>
+		</div>
+	</div>
+</div>
+{% endblock %}

@@ -1,5 +1,6 @@
 from django.urls import path
-from .views import view_home, view_pessoas, view_departamentos, view_tipoOperacoes, view_classificacaoOperacoes
+
+from .views import view_home, view_pessoas, view_departamentos, view_tipoOperacoes, view_classificacaoOperacoes, view_operacaoFinanceiraEntradas
 
 urlpatterns = [
     path("", view_home.index, name="index"),
@@ -31,6 +32,18 @@ urlpatterns = [
     path("classificacao-operacao/<int:id>/edit", view_classificacaoOperacoes.edit, name="classificacao-operacao.edit"),
     path("classificacao-operacao/<int:id>/update", view_classificacaoOperacoes.update, name="classificacao-operacao.update"),
     path("classificacao-operacao/<int:id>/delete", view_classificacaoOperacoes.destroy, name="classificacao-operacao.delete"),
+    
+    
+    path("operacao-financeira-entrada", view_operacaoFinanceiraEntradas.index, name="operacao-financeira-entrada.index"),
+    path("operacao-financeira-entrada/create/", view_operacaoFinanceiraEntradas.create, name="operacao-financeira-entrada.create"),
+    path("operacao-financeira-entrada/store/", view_operacaoFinanceiraEntradas.store, name="operacao-financeira-entrada.store"),
+    path("operacao-financeira-entrada/<int:id>/", view_operacaoFinanceiraEntradas.show, name="operacao-financeira-entrada.show"),
+    path("operacao-financeira-entrada/<int:id>/edit", view_operacaoFinanceiraEntradas.edit, name="operacao-financeira-entrada.edit"),
+    path("operacao-financeira-entrada/<int:id>/update", view_operacaoFinanceiraEntradas.update, name="operacao-financeira-entrada.update"),
+    path("operacao-financeira-entrada/<int:id>/delete", view_operacaoFinanceiraEntradas.destroy, name="operacao-financeira-entrada.delete"),
+    
+    
+    
 ]
 
 """ MODELOS DOS VERBOS
