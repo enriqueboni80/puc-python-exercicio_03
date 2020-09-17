@@ -11,19 +11,14 @@ from ..forms import RawPessoaForm
 
 
 def index(request):
-    lista_p = Pessoa.objects.all()
-    dados = {
-        "listaPessoas": lista_p,
-    }
+    returnedObjects = Pessoa.objects.all()
+    dados = {"returnedObjectsList": returnedObjects}
     return render(request, "pessoa/listar.html", dados)
 
 
-def create(request):  
+def create(request):
     form = RawPessoaForm(request.POST or None)
-    dados = {
-        "form": form,
-        "qtdDepartamentos": Departamento.objects.count()
-    }
+    dados = {"form": form, "qtdDepartamentos": Departamento.objects.count()}
     return render(request, "pessoa/create.html", dados)
 
 
@@ -40,30 +35,21 @@ def store(request):
     return redirect("pessoa.index")
 
 
-def show(request, idPessoa):
-    p = Pessoa.objects.get(pk=idPessoa)
-    dados = {"pessoa": p}
+def show(request, id):
+    returnedObject = Pessoa.objects.get(pk=id)
+    dados = {"returnedObject": returnedObject}
     return render(request, "pessoa/detalhar.html", dados)
 
 
-def edit(request, idPessoa):
-    pessoa = Pessoa.objects.get(pk=idPessoa)
-    form = RawPessoaForm(
-        {
-            "nome": pessoa.nome,
-            "sobrenome": pessoa.sobrenome,
-            "idade": pessoa.idade,
-            "depto_atual": pessoa.depto_atual,
-            "depto_chefia": pessoa.depto_chefia,
-            "escolaridade": pessoa.escolaridade,
-        }
-    )
-    dados = {"pessoa_id": pessoa.id, "form": form}
+def edit(request, id):
+    returnedObject = Pessoa.objects.filter(pk=id).values()[0]
+    form = RawPessoaForm(returnedObject)
+    dados = {"returnedObject": returnedObject, "form": form}
     return render(request, "pessoa/edit.html", dados)
 
 
-def update(request, idPessoa):
-    pessoa = Pessoa.objects.filter(pk=idPessoa)
+def update(request, id):
+    pessoa = Pessoa.objects.filter(pk=id)
     pessoa.update(
         nome=request.POST["nome"],
         sobrenome=request.POST["sobrenome"],
@@ -75,6 +61,6 @@ def update(request, idPessoa):
     return redirect("pessoa.index")
 
 
-def destroy(request, idPessoa):
+def destroy(request, id):
     Pessoa.objects.get(pk=idPessoa).delete()
     return redirect("pessoa.index")

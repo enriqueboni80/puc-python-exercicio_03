@@ -7,11 +7,11 @@ from ..forms import RawDepartamentoForm
 
 
 def index(request):
-    lista_depto = Departamento.objects.all()
-    dados = {"listaDepartamentos": lista_depto}
+    returnedObjects = Departamento.objects.all()
+    dados = {"returnedObjectsList": returnedObjects}
     return render(request, "departamento/listar.html", dados)
-
-
+    
+    
 def create(request):
     form = RawDepartamentoForm(request.POST or None)
     dados = {"form": form}
@@ -19,35 +19,33 @@ def create(request):
 
 
 def store(request):
-    if request.method == "POST":
-        departamento = Departamento(
-            sigla=request.POST["sigla"], descricao=request.POST["descricao"],
-        )
-        departamento.save()
+    form = RawDepartamentoForm(request.POST)
+    if form.is_valid():
+        Departamento.objects.create(**form.cleaned_data)
         return redirect("departamento.index")
+    
 
-
-def show(request, idDepartamento):
-    depto = Departamento.objects.get(pk=idDepartamento)
-    dados = {"departamento": depto}
+def show(request, id):
+    returnedObject = Departamento.objects.get(pk=id)
+    dados = {"returnedObject": returnedObject}
     return render(request, "departamento/detalhar.html", dados)
+    
 
-
-def edit(request, idDepartamento):
-    depto = Departamento.objects.get(pk=idDepartamento)
-    form = RawDepartamentoForm({"sigla": depto.sigla, "descricao": depto.descricao})
-    dados = {"depto_id": depto.id, "form": form}
+def edit(request, id):
+    returnedObject = Departamento.objects.filter(pk=id).values()[0]
+    form = RawDepartamentoForm(returnedObject)
+    dados = {"returnedObject": returnedObject, "form": form}
     return render(request, "departamento/edit.html", dados)
 
 
-def update(request, idDepartamento):
-    depto = Departamento.objects.filter(pk=idDepartamento)
-    depto.update(
-        sigla=request.POST["sigla"], descricao=request.POST["descricao"],
-    )
-    return redirect("departamento.index")
-
-
+def update(request, id):
+    returnedObject = Departamento.objects.filter(pk=id)
+    form = RawDepartamentoForm(request.POST or None)
+    if form.is_valid():
+        returnedObject.update(**form.cleaned_data)
+        return redirect("departamento.index")
+    
+    
 def destroy(request, idDepartamento):
     Departamento.objects.get(pk=idDepartamento).delete()
     return redirect("departamento.index")

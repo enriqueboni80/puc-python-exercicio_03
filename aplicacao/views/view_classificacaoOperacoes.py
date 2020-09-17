@@ -19,14 +19,12 @@ def create(request):
 
 
 def store(request):
-    if request.method == "POST":
-        classificacaoOperacao = ClassificacaoOperacao(
-            nome=request.POST["nome"], descricao=request.POST["descricao"],
-        )
-        classificacaoOperacao.save()
+    form = RawClassificacaoOperacaoForm(request.POST)
+    if form.is_valid():
+        ClassificacaoOperacao.objects.create(**form.cleaned_data)
         return redirect("classificacao-operacao.index")
-
-
+    
+    
 def show(request, id):
     returnedObject = ClassificacaoOperacao.objects.get(pk=id)
     dados = {"returnedObject": returnedObject}
@@ -34,18 +32,18 @@ def show(request, id):
 
 
 def edit(request, id):
-    returnedObject = ClassificacaoOperacao.objects.get(pk=id)
-    form = RawClassificacaoOperacaoForm({"nome": returnedObject.nome, "descricao": returnedObject.descricao})
-    dados = {"returnedObject_id": returnedObject.id, "form": form}
+    returnedObject = ClassificacaoOperacao.objects.filter(pk=id).values()[0]
+    form = RawClassificacaoOperacaoForm(returnedObject)
+    dados = {"returnedObject": returnedObject, "form": form}
     return render(request, "classificacao-operacao/edit.html", dados)
 
 
 def update(request, id):
     returnedObject = ClassificacaoOperacao.objects.filter(pk=id)
-    returnedObject.update(
-        nome=request.POST["nome"], descricao=request.POST["descricao"],
-    )
-    return redirect("classificacao-operacao.index")
+    form = RawClassificacaoOperacaoForm(request.POST or None)
+    if form.is_valid():
+        returnedObject.update(**form.cleaned_data)
+        return redirect("classificacao-operacao.index")
 
 
 def destroy(request, id):

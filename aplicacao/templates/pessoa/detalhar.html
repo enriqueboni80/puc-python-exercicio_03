@@ -8,29 +8,29 @@
 				<h4 class="card-title">Pessoa</h4>
                     <div class='row'>
                         <div class='col-4'><h3>#Id: </h3></div>
-                        <div class='col-8'><h3>{{pessoa.id}}</h3></div>
+                        <div class='col-8'><h3>{{returnedObject.id}}</h3></div>
                     </div>
                     <div class='row'>
                         <div class='col-4'><h3>Nome: </h3></div>
-                        <div class='col-8'><h3>{{pessoa.nome}}</h3></div>
+                        <div class='col-8'><h3>{{returnedObject.nome}}</h3></div>
                     </div>
                     <div class='row'>
                         <div class='col-4'><h3>Sobrenome: </h3></div>
-                        <div class='col-8'><h3>{{pessoa.sobrenome}}</h3></div>
+                        <div class='col-8'><h3>{{returnedObject.sobrenome}}</h3></div>
                     </div>
                     <div class='row'>
                         <div class='col-4'><h3>Idade: </h3></div>
-                        <div class='col-8'><h3>{{pessoa.idade}}</h3></div>
+                        <div class='col-8'><h3>{{returnedObject.idade}}</h3></div>
                     </div>
                     <div class='row justify-content-md-center' style="margin-top:30px">
                         <div style="margin-right:10px">
-                            <form action="{% url 'pessoa.edit' pessoa.id %}" method="post">
+                            <form action="{% url 'pessoa.edit' returnedObject.id %}" method="post">
                                 {% csrf_token %}
                                 <button type="submit" value="edit" class="btn btn-warning btn-md">Editar</button>
                             </form>
                         </div>
                         <div>
-                            <form action="{% url 'pessoa.delete' pessoa.id %}" method="post">
+                            <form action="{% url 'pessoa.delete' returnedObject.id %}" method="post">
                                 {% csrf_token %}
                                 <button type="submit" value="Delete" class="btn btn-danger btn-md">Deletar</button>
                             </form>

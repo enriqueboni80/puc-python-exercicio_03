@@ -8,25 +8,25 @@
 				<h4 class="card-title">Departamento</h4>
                     <div class='row'>
                         <div class='col-4'><h3>#Id: </h3></div>
-                        <div class='col-8'><h3>{{departamento.id}}</h3></div>
+                        <div class='col-8'><h3>{{returnedObject.id}}</h3></div>
                     </div>
                     <div class='row'>
                         <div class='col-4'><h3>Sigla: </h3></div>
-                        <div class='col-8'><h3>{{departamento.sigla}}</h3></div>
+                        <div class='col-8'><h3>{{returnedObject.sigla}}</h3></div>
                     </div>
                     <div class='row'>
                         <div class='col-4'><h3>Descrição: </h3></div>
-                        <div class='col-8'><h3>{{departamento.descricao}}</h3></div>
+                        <div class='col-8'><h3>{{returnedObject.descricao}}</h3></div>
                     </div>
                     <div class='row justify-content-md-center' style="margin-top:30px">
                         <div style="margin-right:10px">
-                            <form action="{% url 'departamento.edit' departamento.id %}" method="post">
+                            <form action="{% url 'departamento.edit' returnedObject.id %}" method="post">
                                 {% csrf_token %}
                                 <button type="submit" value="edit" class="btn btn-warning btn-md">Editar</button>
                             </form>
                         </div>
                         <div>
-                            <form action="{% url 'departamento.delete' departamento.id %}" method="post">
+                            <form action="{% url 'departamento.delete' returnedObject.id %}" method="post">
                                 {% csrf_token %}
                                 <button type="submit" value="Delete" class="btn btn-danger btn-md">Deletar</button>
                             </form>
