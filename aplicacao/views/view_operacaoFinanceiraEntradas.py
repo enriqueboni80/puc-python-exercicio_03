@@ -3,7 +3,7 @@ from django.http import HttpResponse, JsonResponse
 from ..models.operacaoFinanceira import OperacaoFinanceiraEntrada
 from django.template import loader
 
-from ..forms import RawOperacaoFinanceiraEntradaForm
+from ..forms.rawOperacaoFinanceiraEntradaForm import RawOperacaoFinanceiraEntradaForm
 
 
 def index(request):
@@ -50,4 +50,4 @@ def update(request, id):
 
 def destroy(request, id):
     OperacaoFinanceiraEntrada.objects.get(pk=id).delete()
-    return redirect("classificacao-operacao.index")
+    return redirect("operacao-financeira-entrada.index")

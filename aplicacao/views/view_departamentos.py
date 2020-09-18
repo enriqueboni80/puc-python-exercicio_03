@@ -3,7 +3,7 @@ from django.http import HttpResponse, JsonResponse
 from ..models.departamento import Departamento
 from django.template import loader
 
-from ..forms import RawDepartamentoForm
+from ..forms.rawDepartamentoForm import RawDepartamentoForm
 
 
 def index(request):

@@ -4,7 +4,7 @@ from ..models.pessoa import Pessoa
 from ..models.departamento import Departamento
 from django.template import loader
 
-from ..forms import RawPessoaForm
+from ..forms.rawPessoaForm import RawPessoaForm
 
 
 """ return HttpResponse("Chegou aqui") """

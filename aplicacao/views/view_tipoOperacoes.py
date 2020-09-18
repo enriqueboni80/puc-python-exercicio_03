@@ -3,7 +3,7 @@ from django.http import HttpResponse, JsonResponse
 from ..models.tipoOperacao import TipoOperacao
 from django.template import loader
 
-from ..forms import RawTipoOperacaoForm
+from ..forms.rawTipoOperacaoForm import RawTipoOperacaoForm
 
 
 def index(request):

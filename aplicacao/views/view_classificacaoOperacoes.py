@@ -3,7 +3,7 @@ from django.http import HttpResponse, JsonResponse
 from ..models.classificacaoOperacao import ClassificacaoOperacao
 from django.template import loader
 
-from ..forms import RawClassificacaoOperacaoForm
+from ..forms.rawClassificacaoOperacaoForm import RawClassificacaoOperacaoForm
 
 
 def index(request):
