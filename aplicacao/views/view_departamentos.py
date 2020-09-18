@@ -7,7 +7,7 @@ from ..forms import RawDepartamentoForm
 
 
 def index(request):
-    returnedObjects = Departamento.objects.all()
+    returnedObjects = Departamento.objects.all().order_by('-id')
     dados = {"returnedObjectsList": returnedObjects}
     return render(request, "departamento/listar.html", dados)
     

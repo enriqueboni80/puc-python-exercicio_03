@@ -7,7 +7,7 @@ from ..forms import RawTipoOperacaoForm
 
 
 def index(request):
-    returnedObjects = TipoOperacao.objects.all()
+    returnedObjects = TipoOperacao.objects.all().order_by('-id')
     dados = {"returnedObjectsList": returnedObjects}
     return render(request, "tipo-operacao/listar.html", dados)
 

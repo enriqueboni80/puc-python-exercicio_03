@@ -11,7 +11,7 @@ from ..forms import RawPessoaForm
 
 
 def index(request):
-    returnedObjects = Pessoa.objects.all()
+    returnedObjects = Pessoa.objects.all().order_by('-id')
     dados = {"returnedObjectsList": returnedObjects}
     return render(request, "pessoa/listar.html", dados)
 
@@ -23,23 +23,23 @@ def create(request):
 
 
 def store(request):
-    pessoa = Pessoa(
-        nome=request.POST["nome"],
-        sobrenome=request.POST["sobrenome"],
-        idade=request.POST["idade"],
-        depto_atual_id=request.POST["depto_atual"],
-        depto_chefia_id=request.POST["depto_chefia"],
-        escolaridade=request.POST["escolaridade"],
-    )
-    pessoa.save()
-    return redirect("pessoa.index")
-
+    form = RawPessoaForm(request.POST)
+    if form.is_valid():       
+        instance = Pessoa.objects.create(
+            nome=form.cleaned_data.get("nome"),
+            sobrenome=form.cleaned_data.get("sobrenome"),
+            idade=form.cleaned_data.get("idade"),
+            depto_atual=form.cleaned_data.get("depto_atual"),
+            depto_chefia=form.cleaned_data.get("depto_chefia"),
+            escolaridade=form.cleaned_data.get("escolaridade"),
+        )
+        instance.hist_deptos.set(form.cleaned_data.get("hist_deptos"))
+        return redirect("pessoa.index")
 
 def show(request, id):
     returnedObject = Pessoa.objects.get(pk=id)
     dados = {"returnedObject": returnedObject}
     return render(request, "pessoa/detalhar.html", dados)
-
 
 def edit(request, id):
     returnedObject = Pessoa.objects.filter(pk=id).values()[0]
@@ -49,18 +49,20 @@ def edit(request, id):
 
 
 def update(request, id):
-    pessoa = Pessoa.objects.filter(pk=id)
-    pessoa.update(
-        nome=request.POST["nome"],
-        sobrenome=request.POST["sobrenome"],
-        idade=request.POST["idade"],
-        depto_atual_id=request.POST["depto_atual"],
-        depto_chefia_id=request.POST["depto_chefia"],
-        escolaridade=request.POST["escolaridade"],
-    )
-    return redirect("pessoa.index")
-
-
+    returnedObject = Pessoa.objects.filter(pk=id)
+    form = RawPessoaForm(request.POST or None)
+    if form.is_valid():
+        returnedObject.update(
+            nome=form.cleaned_data.get("nome"),
+            sobrenome=form.cleaned_data.get("sobrenome"),
+            idade=form.cleaned_data.get("idade"),
+            depto_atual=form.cleaned_data.get("depto_atual"),
+            depto_chefia=form.cleaned_data.get("depto_chefia"),
+            escolaridade=form.cleaned_data.get("escolaridade"),
+        )
+        ''' returnedObject.hist_deptos.set(form.cleaned_data.get("hist_deptos")) '''
+        return redirect("pessoa.index")
+    
 def destroy(request, id):
-    Pessoa.objects.get(pk=idPessoa).delete()
+    Pessoa.objects.get(pk=id).delete()
     return redirect("pessoa.index")

@@ -7,8 +7,8 @@ from ..models.departamento import Departamento
 
 
 def index(request):
-    lista_pessoas = Pessoa.objects.all()
-    lista_departamentos = Departamento.objects.all()
+    lista_pessoas = Pessoa.objects.all().order_by('-id')
+    lista_departamentos = Departamento.objects.all().order_by('-id')
     dados = {
         "listaPessoas": lista_pessoas,
         "listaDepartamentos": lista_departamentos

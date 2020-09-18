@@ -7,7 +7,7 @@ from ..forms import RawOperacaoFinanceiraEntradaForm
 
 
 def index(request):
-    returnedObjects = OperacaoFinanceiraEntrada.objects.all()
+    returnedObjects = OperacaoFinanceiraEntrada.objects.all().order_by('-id')
     dados = {"returnedObjectsList": returnedObjects}
     return render(request, "operacao-financeira-entrada/listar.html", dados)
 
