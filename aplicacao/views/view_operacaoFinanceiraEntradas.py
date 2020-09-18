@@ -33,6 +33,8 @@ def show(request, id):
 
 def edit(request, id):
     returnedObject = OperacaoFinanceiraEntrada.objects.filter(pk=id).values()[0]
+    returnedObject['classificao_operacao'] = returnedObject.get('classificao_operacao_id')
+    returnedObject['tipo_operacao'] = returnedObject.get('tipo_operacao_id')
     form = RawOperacaoFinanceiraEntradaForm(returnedObject)
     dados = {"returnedObject": returnedObject, "form": form}
     return render(request, "operacao-financeira-entrada/edit.html", dados)

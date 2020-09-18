@@ -24,7 +24,7 @@ class RawPessoaForm(forms.Form):
     nome = forms.CharField()
     sobrenome = forms.CharField()
     idade = forms.IntegerField()
-    depto_atual = forms.ModelChoiceField(queryset=Departamento.objects.all())
+    depto_atual = forms.ModelChoiceField(queryset=Departamento.objects.all(), required=False)
     hist_deptos = forms.ModelMultipleChoiceField(queryset=Departamento.objects.all(), required=False)
     depto_chefia = forms.ModelChoiceField(queryset=Departamento.objects.all(), required=False)
     escolaridade = forms.ChoiceField(

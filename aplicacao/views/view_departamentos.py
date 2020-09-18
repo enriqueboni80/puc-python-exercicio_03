@@ -46,6 +46,6 @@ def update(request, id):
         return redirect("departamento.index")
     
     
-def destroy(request, idDepartamento):
-    Departamento.objects.get(pk=idDepartamento).delete()
+def destroy(request, id):
+    Departamento.objects.get(pk=id).delete()
     return redirect("departamento.index")

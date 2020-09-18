@@ -34,7 +34,12 @@
 										<td>{{ object.tipo_operacao }}</td>
 										<td>{{ object.data_previsao }}</td>
 										<td>{{ object.data_recebimento }}</td>
-										<td>{{ object.situacao }}</td>
+										<td>
+											{% if object.situacao == '1' %}Recebido
+											{% elif object.situacao == '2' %}A Receber
+											{% else %} Não Indentificado
+											{% endif %}
+										</td>
 									</tr>
 								{% endfor %}
 								</tbody>

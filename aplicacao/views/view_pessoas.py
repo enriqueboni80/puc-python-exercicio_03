@@ -17,7 +17,7 @@ def index(request):
 
 
 def create(request):
-    form = RawPessoaForm(request.POST or None)
+    form = RawPessoaForm()
     dados = {"form": form, "qtdDepartamentos": Departamento.objects.count()}
     return render(request, "pessoa/create.html", dados)
 
@@ -43,6 +43,8 @@ def show(request, id):
 
 def edit(request, id):
     returnedObject = Pessoa.objects.filter(pk=id).values()[0]
+    returnedObject['depto_atual'] = returnedObject.get('depto_atual_id')
+    returnedObject['depto_chefia'] = returnedObject.get('depto_chefia_id')
     form = RawPessoaForm(returnedObject)
     dados = {"returnedObject": returnedObject, "form": form}
     return render(request, "pessoa/edit.html", dados)
