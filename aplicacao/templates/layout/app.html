@@ -24,8 +24,13 @@
       </div>
     </div>
   </div>
-  <script src="{%static "vendors/base/vendor.bundle.base.js" %}"></script>
-  <script src="{%static "js/template.js" %}"></script>
+  <script src="{% static "vendors/base/vendor.bundle.base.js" %}"></script>
+  <script src="{% static "js/template.js" %}"></script>
+  <script src="{% static "js/jquery.mask.js" %}"></script>
+{% comment %}   <script>
+      $(document).ready(function () {
+        $('input[name=valor]').mask('#.##0,00', {reverse: true});
+    })
+  </script> {% endcomment %}
 </body>
-
 </html>

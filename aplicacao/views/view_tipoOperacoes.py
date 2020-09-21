@@ -19,13 +19,11 @@ def create(request):
 
 
 def store(request):
-    if request.method == "POST":
-        tipoOperacao = TipoOperacao(
-            nome=request.POST["nome"], descricao=request.POST["descricao"],
-        )
-        tipoOperacao.save()
+    form = RawTipoOperacaoForm(request.POST)
+    if form.is_valid():
+        TipoOperacao.objects.create(**form.cleaned_data)
         return redirect("tipo-operacao.index")
-
+    
 
 def show(request, id):
     returnedObject = TipoOperacao.objects.get(pk=id)
@@ -42,12 +40,12 @@ def edit(request, id):
 
 def update(request, id):
     returnedObject = TipoOperacao.objects.filter(pk=id)
-    returnedObject.update(
-        nome=request.POST["nome"], descricao=request.POST["descricao"],
-    )
-    return redirect("tipo-operacao.index")
-
-
+    form = RawTipoOperacaoForm(request.POST or None)
+    if form.is_valid():
+        returnedObject.update(**form.cleaned_data)
+        return redirect("tipo-operacao.index")
+    
+    
 def destroy(request, id):
     TipoOperacao.objects.get(pk=id).delete()
     return redirect("tipo-operacao.index")

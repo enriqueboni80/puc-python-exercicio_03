@@ -7,7 +7,7 @@
 			<div class="card-body">
 				<div class="row">
 					<div class="col-6"><h4 class="card-title">Lista de Departamentos</h4></div>
-					<div class="col-6" style="text-align:right"><a href="./departamento/create/" type="button" class="btn btn-success">Novo</a></div>
+					<div class="col-6" style="text-align:right"><a href="{% url 'departamento.create' %}" type="button" class="btn btn-success">Novo</a></div>
 				</div>
 				{% if returnedObjectsList %}
 						<div class="table-responsive">

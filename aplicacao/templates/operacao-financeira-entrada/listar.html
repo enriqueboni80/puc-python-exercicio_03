@@ -15,12 +15,12 @@
 								<thead>
 									<tr>
 										<th>#Id</th>
-										<th>valor</th>
+										<th>Data Recebimento</th>
 										<th>Descrição</th>
+										<th>valor</th>
 										<th>Classificação</th>
 										<th>Tipo</th>
 										<th>Data Previsao</th>
-										<th>Data Recebimento</th>
 										<th>Situação</th>
 									</tr>
 								</thead>
@@ -28,12 +28,12 @@
 								{% for object in returnedObjectsList %}
 									<tr style="cursor:pointer" onclick="window.location='{% url 'operacao-financeira-entrada.show' object.id %}'">
 										<td>{{ object.id }}</td>
-										<td>{{ object.valor }}</td>
+										<td>{{ object.data_recebimento }}</td>
 										<td>{{ object.descricao }}</td>
+										<td>{{ object.valor }}</td>
 										<td>{{ object.classificao_operacao }}</td>
 										<td>{{ object.tipo_operacao }}</td>
 										<td>{{ object.data_previsao }}</td>
-										<td>{{ object.data_recebimento }}</td>
 										<td>
 											{% if object.situacao == '1' %}Recebido
 											{% elif object.situacao == '2' %}A Receber

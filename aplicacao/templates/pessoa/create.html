@@ -13,7 +13,14 @@
 				{% endif %}
 				<form class="forms-sample" action="{% url 'pessoa.store' %}" method="post">
 					{% csrf_token %}
-					{{ form.as_p }}
+					{% for field in form %}
+    					<div class="form-group row">
+							<label class="col-sm-3 col-form-label" for="{{ field.auto_id }}">{{ field.label }}</label>
+							<div class="col-sm-9">
+								{{ field }}
+							</div>
+    					</div>
+					{% endfor %}
 					<button type="submit" class="btn btn-primary mr-2">Gravar</button>
 				</form>
 			</div>
