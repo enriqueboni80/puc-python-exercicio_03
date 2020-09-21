@@ -8,7 +8,7 @@ urlpatterns = [
     path('departamento/', include('aplicacao.routes.departamento')),
     path('tipo-operacao/', include('aplicacao.routes.tipo-operacao')),
     path('classificacao-operacao/', include('aplicacao.routes.classificacao-operacao')),
-    path('operacao-financeira-entrada/', include('aplicacao.routes.operacao-financeira-entrada')),
+    path('operacao-financeira/', include('aplicacao.routes.operacao-financeira')),
 ]
 
 """ MODELOS DOS VERBOS
