@@ -8,11 +8,20 @@
 				<div class="row">
 					<div class="col-6"><h4 class="card-title">Relatório de entradas e saídas</h4></div>
 				</div>
-				<div> Recebido: {{ valorTotalEntradasRecebidas }}</div>
-				<div> A Receber: {{ valorTotalEntradasAReceber }}</div>
-				<div> Pago: {{ valorTotalSaidasPagas }}</div>
-				<div> A Pagar: {{ valorTotalSaidasAPagar }}</div>
-				<div> Resultado: {{ valorResultado }}</div>
+				<div class="col-lg-3">
+					<div class="row">
+						<div class="col-sm-12">
+							<ul class="graphl-legend-rectangle">
+								<li><span class="bg-success"></span>Recebido: {{ valorTotalEntradasRecebidas }}</li>
+								<li><span class="bg-info"></span>A Receber: {{ valorTotalEntradasAReceber }}</li>
+								<li><span class="bg-danger"></span>Pago: {{ valorTotalSaidasPagas }}</li>
+								<li><span class="bg-warning"></span>A Pagar: {{ valorTotalSaidasAPagar }}</li>
+								<li><span class="bg-success"></span>Resultado: {{ valorResultado }}</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+
 				{% if returnedObjectsList %}
 						<div class="table-responsive">
 							<table class="table table-hover">
