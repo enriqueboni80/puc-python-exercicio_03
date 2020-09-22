@@ -27,8 +27,8 @@ class OperacaoFinanceira(models.Model):
 
 class OperacaoFinanceiraEntrada(OperacaoFinanceira):
     
-    data_previsao = models.DateField()
-    data_recebimento = models.DateField()
+    data_previsao = models.DateField(null=True)
+    data_recebimento = models.DateField(null=True)
     
     SITUACAO_CHOICES = [
 		('1','Recebido'),
@@ -43,8 +43,8 @@ class OperacaoFinanceiraEntrada(OperacaoFinanceira):
     
 class OperacaoFinanceiraSaida(OperacaoFinanceira):
     
-    data_vencimento = models.DateField()
-    data_pagamento = models.DateField()
+    data_vencimento = models.DateField(null=True)
+    data_pagamento = models.DateField(null=True)
     
     SITUACAO_CHOICES = [
 		('1','Pago'),

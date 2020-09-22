@@ -13,7 +13,7 @@ def index(request):
 
 
 def create(request):
-    form = RawOperacaoFinanceiraSaidaForm(request.POST or None)
+    form = RawOperacaoFinanceiraSaidaForm()
     dados = {"form": form}
     return render(request, "operacao-financeira/saida/create.html", dados)
 

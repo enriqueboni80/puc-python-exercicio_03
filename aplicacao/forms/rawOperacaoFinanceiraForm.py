@@ -8,8 +8,8 @@ class RawOperacaoFinanceiraEntradaForm(forms.Form):
     descricao = forms.CharField(widget=forms.TextInput(attrs={'class':'form-control'}))
     classificao_operacao = forms.ModelChoiceField(queryset=ClassificacaoOperacao.objects.all(), widget=forms.Select(attrs={'class':'form-control'}))
     tipo_operacao = forms.ModelChoiceField(queryset=TipoOperacao.objects.all(), widget=forms.Select(attrs={'class':'form-control'}))
-    data_recebimento = forms.DateField(widget=forms.DateInput(attrs={'type': 'date', 'class':'form-control', 'placeholder':'dd/mm/aaaa'}))
-    data_previsao = forms.DateField(widget=forms.DateInput(attrs={'type': 'date', 'class':'form-control', 'placeholder':'dd/mm/aaaa'}))
+    data_recebimento = forms.DateField(widget=forms.DateInput(attrs={'type': 'date', 'class':'form-control', 'placeholder':'dd/mm/aaaa'}), required=False)
+    data_previsao = forms.DateField(widget=forms.DateInput(attrs={'type': 'date', 'class':'form-control', 'placeholder':'dd/mm/aaaa'}), required=False)
     situacao = forms.ChoiceField(
         choices=[
             ('1','Recebido'),
@@ -24,8 +24,8 @@ class RawOperacaoFinanceiraSaidaForm(forms.Form):
     descricao = forms.CharField(widget=forms.TextInput(attrs={'class':'form-control'}))
     classificao_operacao = forms.ModelChoiceField(queryset=ClassificacaoOperacao.objects.all(), widget=forms.Select(attrs={'class':'form-control'}))
     tipo_operacao = forms.ModelChoiceField(queryset=TipoOperacao.objects.all(), widget=forms.Select(attrs={'class':'form-control'}))
-    data_vencimento = forms.DateField(widget=forms.DateInput(attrs={'type': 'date', 'class':'form-control', 'placeholder':'dd/mm/aaaa'}))
-    data_pagamento = forms.DateField(widget=forms.DateInput(attrs={'type': 'date', 'class':'form-control', 'placeholder':'dd/mm/aaaa'}))
+    data_vencimento = forms.DateField(widget=forms.DateInput(attrs={'type': 'date', 'class':'form-control', 'placeholder':'dd/mm/aaaa'}), required=False)
+    data_pagamento = forms.DateField(widget=forms.DateInput(attrs={'type': 'date', 'class':'form-control', 'placeholder':'dd/mm/aaaa'}), required=False)
     situacao = forms.ChoiceField(
         choices=[
             ('1','Pago'),
