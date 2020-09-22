@@ -35,6 +35,8 @@ def edit(request, id):
     returnedObject = OperacaoFinanceiraSaida.objects.filter(pk=id).values()[0]
     returnedObject['classificao_operacao'] = returnedObject.get('classificao_operacao_id')
     returnedObject['tipo_operacao'] = returnedObject.get('tipo_operacao_id')
+    returnedObject['data_vencimento'] = returnedObject['data_vencimento'].strftime("%d/%m/%Y")
+    returnedObject['data_pagamento'] = returnedObject['data_pagamento'].strftime("%d/%m/%Y")
     form = RawOperacaoFinanceiraSaidaForm(returnedObject)
     dados = {"returnedObject": returnedObject, "form": form}
     return render(request, "operacao-financeira/saida/edit.html", dados)

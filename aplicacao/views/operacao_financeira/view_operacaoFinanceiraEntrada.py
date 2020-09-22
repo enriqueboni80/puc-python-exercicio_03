@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse, JsonResponse
 from ...models.operacaoFinanceira import OperacaoFinanceiraEntrada
 from django.template import loader
+from datetime import datetime
 
 from ...forms.rawOperacaoFinanceiraForm import RawOperacaoFinanceiraEntradaForm
 
@@ -35,6 +36,8 @@ def edit(request, id):
     returnedObject = OperacaoFinanceiraEntrada.objects.filter(pk=id).values()[0]
     returnedObject['classificao_operacao'] = returnedObject.get('classificao_operacao_id')
     returnedObject['tipo_operacao'] = returnedObject.get('tipo_operacao_id')
+    returnedObject['data_recebimento'] = returnedObject['data_recebimento'].strftime("%d/%m/%Y")
+    returnedObject['data_previsao'] = returnedObject['data_previsao'].strftime("%d/%m/%Y")
     form = RawOperacaoFinanceiraEntradaForm(returnedObject)
     dados = {"returnedObject": returnedObject, "form": form}
     return render(request, "operacao-financeira/entrada/edit.html", dados)
