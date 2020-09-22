@@ -5,7 +5,7 @@
 	<div class="col-md-6 grid-margin stretch-card">
 		<div class="card">
 			<div class="card-body">
-				<h4 class="card-title">Editar Entradas</h4>
+				<h4 class="card-title">Editar Saída</h4>
 				<form class="forms-sample" action="{% url 'operacao-financeira-saida.update' returnedObject.id %}" method="post">
 					{% csrf_token %}
 					{{ form.as_p }}

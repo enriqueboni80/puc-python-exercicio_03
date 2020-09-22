@@ -1,15 +1,16 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse, JsonResponse
-from ...models.operacaoFinanceira import OperacaoFinanceiraEntrada
+from django.db.models import Sum
 from django.template import loader
 from datetime import datetime
-
+from ...models.operacaoFinanceira import OperacaoFinanceiraEntrada
 from ...forms.rawOperacaoFinanceiraForm import RawOperacaoFinanceiraEntradaForm
 
 
 def index(request):
     returnedObjects = OperacaoFinanceiraEntrada.objects.all().order_by('-id')
-    dados = {"returnedObjectsList": returnedObjects}
+    valorTotalEntradas =  OperacaoFinanceiraEntrada.objects.all().aggregate(Sum('valor'))['valor__sum']
+    dados = {"returnedObjectsList": returnedObjects, "valorResultado": valorTotalEntradas}
     return render(request, "operacao-financeira/entrada/listar.html", dados)
 
 

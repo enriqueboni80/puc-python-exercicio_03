@@ -1,8 +1,7 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse, JsonResponse
-from ..models.tipoOperacao import TipoOperacao
 from django.template import loader
-
+from ..models.tipoOperacao import TipoOperacao
 from ..forms.rawTipoOperacaoForm import RawTipoOperacaoForm
 
 

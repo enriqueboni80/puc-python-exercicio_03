@@ -1,9 +1,8 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse, JsonResponse
+from django.template import loader
 from ..models.pessoa import Pessoa
 from ..models.departamento import Departamento
-from django.template import loader
-
 from ..forms.rawPessoaForm import RawPessoaForm
 
 

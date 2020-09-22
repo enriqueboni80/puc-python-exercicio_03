@@ -1,8 +1,7 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse, JsonResponse
-from ...models.operacaoFinanceira import OperacaoFinanceiraSaida
 from django.template import loader
-
+from ...models.operacaoFinanceira import OperacaoFinanceiraSaida
 from ...forms.rawOperacaoFinanceiraForm import RawOperacaoFinanceiraSaidaForm
 
 

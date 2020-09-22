@@ -8,6 +8,11 @@
 				<div class="row">
 					<div class="col-6"><h4 class="card-title">Relatório de entradas e saídas</h4></div>
 				</div>
+				<div> Recebido: {{ valorTotalEntradasRecebidas }}</div>
+				<div> A Receber: {{ valorTotalEntradasAReceber }}</div>
+				<div> Pago: {{ valorTotalSaidasPagas }}</div>
+				<div> A Pagar: {{ valorTotalSaidasAPagar }}</div>
+				<div> Resultado: {{ valorResultado }}</div>
 				{% if returnedObjectsList %}
 						<div class="table-responsive">
 							<table class="table table-hover">

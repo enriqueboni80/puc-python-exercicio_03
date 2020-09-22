@@ -1,8 +1,7 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse, JsonResponse
-from ..models.classificacaoOperacao import ClassificacaoOperacao
 from django.template import loader
-
+from ..models.classificacaoOperacao import ClassificacaoOperacao
 from ..forms.rawClassificacaoOperacaoForm import RawClassificacaoOperacaoForm
 
 
