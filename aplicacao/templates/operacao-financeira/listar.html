@@ -1,0 +1,74 @@
+{% extends 'layout/app.html' %}
+{% block xpto %}
+
+<div class="row justify-content-md-center">
+	<div class="col-12 grid-margin stretch-card">
+		<div class="card">
+			<div class="card-body">
+				<div class="row">
+					<div class="col-6"><h4 class="card-title">Relatório de entradas e saídas</h4></div>
+				</div>
+				{% if returnedObjectsList %}
+						<div class="table-responsive">
+							<table class="table table-hover">
+								<thead>
+									<tr>
+										<th>#Id</th>
+										<th>Data</th>
+										<th>Descrição</th>
+										<th>valor</th>
+										<th>Classificação</th>
+										<th>Tipo</th>
+										<th>Data Previsao</th>
+										<th>Data Vencimento</th>
+										<th>Situação</th>
+									</tr>
+								</thead>
+								<tbody>
+								{% for object in returnedObjectsList %}
+									<tr style="cursor:pointer" onclick=
+									{% if object.data_pagamento or object.data_vencimento %}"window.location='{% url 'operacao-financeira-saida.show' object.id %}'{% endif %}
+									{% if object.data_recebimento or object.data_previsao %}"window.location='{% url 'operacao-financeira-entrada.show' object.id %}'{% endif %}">
+										<td>{{ object.id }}</td>
+										<td>
+											{% if object.data_recebimento %}
+												{{object.data_recebimento}}
+											{% endif %}
+											{% if object.data_pagamento %}
+												{{object.data_pagamento}}
+											{% endif %}
+										</td>
+										<td>{{ object.descricao }}</td>
+										<td style={% if object.data_pagamento or object.data_vencimento %}"color:red"{% else %}"color:blue"{% endif %}>
+											{% if object.data_pagamento or object.data_vencimento %}-{% endif %}{{ object.valor }}</td>
+										<td>{{ object.classificao_operacao }}</td>
+										<td>{{ object.tipo_operacao }}</td>
+										<td>{% if object.data_previsao %}{{object.data_previsao}}{% else %}-{% endif %}</td>
+										<td>{% if object.data_vencimento %}{{object.data_vencimento}}{% else %}-{% endif %}</td>
+										<td>
+											{% if object.data_pagamento or object.data_vencimento %}
+													{% if object.situacao == '1' %}Pago
+													{% elif object.situacao == '2' %}A Pagar
+													{% else %} Não Indentificado
+													{% endif %}
+											{% endif %}
+											{% if object.data_recebimento or object.data_previsao %}
+													{% if object.situacao == '1' %}Recebido
+													{% elif object.situacao == '2' %}A Receber
+													{% else %} Não Indentificado
+													{% endif %}
+											{% endif %}
+										</td>
+									</tr>
+								{% endfor %}
+								</tbody>
+							</table>
+						</div>
+				{% else %}
+					<p>Não existem lançamentos</p>
+				{% endif %}
+			</div>
+		</div>
+	</div>
+</div>
+{% endblock %}

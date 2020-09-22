@@ -1,10 +1,13 @@
 from django.db import models
+from model_utils.managers import InheritanceManager
 from .classificacaoOperacao import ClassificacaoOperacao
 from .tipoOperacao import TipoOperacao
 
 
 
 class OperacaoFinanceira(models.Model):
+    
+    objects = InheritanceManager()
     
     valor = models.FloatField(null=False)
     descricao = models.CharField(max_length=30)

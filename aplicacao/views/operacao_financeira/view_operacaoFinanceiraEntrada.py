@@ -9,7 +9,7 @@ from ...forms.rawOperacaoFinanceiraForm import RawOperacaoFinanceiraEntradaForm
 def index(request):
     returnedObjects = OperacaoFinanceiraEntrada.objects.all().order_by('-id')
     dados = {"returnedObjectsList": returnedObjects}
-    return render(request, "operacao-financeira-entrada/listar.html", dados)
+    return render(request, "operacao-financeira/entrada/listar.html", dados)
 
 
 def create(request):
@@ -28,7 +28,7 @@ def store(request):
 def show(request, id):
     returnedObject = OperacaoFinanceiraEntrada.objects.get(pk=id)
     dados = {"returnedObject": returnedObject}
-    return render(request, "operacao-financeira-entrada/detalhar.html", dados)
+    return render(request, "operacao-financeira/entrada/detalhar.html", dados)
 
 
 def edit(request, id):
@@ -37,7 +37,7 @@ def edit(request, id):
     returnedObject['tipo_operacao'] = returnedObject.get('tipo_operacao_id')
     form = RawOperacaoFinanceiraEntradaForm(returnedObject)
     dados = {"returnedObject": returnedObject, "form": form}
-    return render(request, "operacao-financeira-entrada/edit.html", dados)
+    return render(request, "operacao-financeira/entrada/edit.html", dados)
 
 
 def update(request, id):

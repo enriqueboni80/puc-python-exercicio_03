@@ -27,52 +27,50 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="{% url 'pessoa.index' %}">
-                  <i class="mdi mdi-account-multiple menu-icon"></i>
-                  <span class="menu-title">Pessoas</span>
-                </a>
-              </li>
-              <li class="nav-item">
-                  <a href="{% url 'departamento.index' %}" class="nav-link">
-                    <i class="mdi mdi-cube-outline menu-icon"></i>
-                    <span class="menu-title">Departamentos</span>
+                  <a href="#" class="nav-link">
+                    <i class="mdi mdi-codepen menu-icon"></i>
+                    <span class="menu-title">RH e DP</span>
                     <i class="menu-arrow"></i>
                   </a>
-              </li>
-              <li class="nav-item">
-                  <a href="{% url 'tipo-operacao.index' %}" class="nav-link">
-                    <i class="mdi mdi-finance menu-icon"></i>
-                    <span class="menu-title">Tipos Operações</span>
-                    <i class="menu-arrow"></i>
-                  </a>
-              </li>
-              <li class="nav-item">
-                  <a href="{% url 'classificacao-operacao.index' %}"  class="nav-link">
-                    <i class="mdi mdi-grid menu-icon"></i>
-                    <span class="menu-title">Classe Operações</span>
-                    <i class="menu-arrow"></i>
-                  </a>
+                  <div class="submenu">
+                      <ul class="submenu-item">
+                          <li class="nav-item"><a class="nav-link" href="{% url 'pessoa.index' %}">Pessoas</a></li>
+                          <li class="nav-item"><a class="nav-link" href="{% url 'departamento.index' %}">Departamentos</a></li>
+                      </ul>
+                  </div>
               </li>
               <li class="nav-item">
                   <a href="{% url 'operacao-financeira-entrada.index' %}" class="nav-link">
                     <i class="mdi mdi-codepen menu-icon"></i>
-                    <span class="menu-title">Lançar Entrada</span>
+                    <span class="menu-title">Lançar Entradas</span>
                     <i class="menu-arrow"></i>
                   </a>
-                  {% comment %}<div class="submenu">
-                      <ul class="submenu-item">
-                          <li class="nav-item"><a class="nav-link" href="../../pages/samples/login.html">Login</a></li>
-                          <li class="nav-item"><a class="nav-link" href="../../pages/samples/login-2.html">Login 2</a></li>
-                          <li class="nav-item"><a class="nav-link" href="../../pages/samples/register.html">Register</a></li>
-                          <li class="nav-item"><a class="nav-link" href="../../pages/samples/register-2.html">Register 2</a></li>
-                          <li class="nav-item"><a class="nav-link" href="../../pages/samples/lock-screen.html">Lockscreen</a></li>
-                      </ul>
-                  </div> {% endcomment %}
               </li>
               <li class="nav-item">
-                  <a onClick="alert('ainda não funciona')" href="#" class="nav-link">
+                  <a href="{% url 'operacao-financeira-saida.index' %}" class="nav-link">
                     <i class="mdi mdi-file-document-box-outline menu-icon"></i>
-                    <span class="menu-title">Documentation</span></a>
+                    <span class="menu-title">Lançar Saídas</span></a>
+              </li>
+              <li class="nav-item">
+                  <a href="{% url 'operacao-financeira.index' %}" class="nav-link">
+                    <i class="mdi mdi-finance menu-icon"></i>
+                    <span class="menu-title">Relatório Financeiro</span>
+                    <i class="menu-arrow"></i>
+                  </a>
+              </li>
+
+              <li class="nav-item">
+                  <a href="#" class="nav-link">
+                    <i class="mdi mdi-codepen menu-icon"></i>
+                    <span class="menu-title">Parametrização</span>
+                    <i class="menu-arrow"></i>
+                  </a>
+                  <div class="submenu">
+                      <ul class="submenu-item">
+                          <li class="nav-item"><a class="nav-link" href="{% url 'tipo-operacao.index' %}">Tipos Operações</a></li>
+                          <li class="nav-item"><a class="nav-link" href="{% url 'classificacao-operacao.index' %}">Classe Operações</a></li>
+                      </ul>
+                  </div>
               </li>
             </ul>
         </div>

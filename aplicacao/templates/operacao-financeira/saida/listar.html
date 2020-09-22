@@ -1,0 +1,55 @@
+{% extends 'layout/app.html' %}
+{% block xpto %}
+
+<div class="row justify-content-md-center">
+	<div class="col-12 grid-margin stretch-card">
+		<div class="card">
+			<div class="card-body">
+				<div class="row">
+					<div class="col-6"><h4 class="card-title">Saídas</h4></div>
+					<div class="col-6" style="text-align:right"><a href="{% url 'operacao-financeira-saida.create' %}" type="button" class="btn btn-success">Novo</a></div>
+				</div>
+				{% if returnedObjectsList %}
+						<div class="table-responsive">
+							<table class="table table-hover">
+								<thead>
+									<tr>
+										<th>#Id</th>
+										<th>Data Pagamento</th>
+										<th>Descrição</th>
+										<th>valor</th>
+										<th>Classificação</th>
+										<th>Tipo</th>
+										<th>Data Vencimento</th>
+										<th>Situação</th>
+									</tr>
+								</thead>
+								<tbody>
+								{% for object in returnedObjectsList %}
+									<tr style="cursor:pointer" onclick="window.location='{% url 'operacao-financeira-saida.show' object.id %}'">
+										<td>{{ object.id }}</td>
+										<td>{{ object.data_pagamento }}</td>
+										<td>{{ object.descricao }}</td>
+										<td>{{ object.valor }}</td>
+										<td>{{ object.classificao_operacao }}</td>
+										<td>{{ object.tipo_operacao }}</td>
+										<td>{{ object.data_vencimento }}</td>
+										<td>
+											{% if object.situacao == '1' %}Pago
+											{% elif object.situacao == '2' %}A Pagar
+											{% else %} Não Indentificado
+											{% endif %}
+										</td>
+									</tr>
+								{% endfor %}
+								</tbody>
+							</table>
+						</div>
+				{% else %}
+					<p>Não existem lançamentos</p>
+				{% endif %}
+			</div>
+		</div>
+	</div>
+</div>
+{% endblock %}

@@ -1,0 +1,26 @@
+{% extends 'layout/app.html' %}
+{% block xpto %}
+
+
+<div class="row justify-content-md-center">
+	<div class="col-md-6 grid-margin stretch-card">
+		<div class="card">
+			<div class="card-body">
+				<h4 class="card-title">Cadastro de saídas</h4>
+				<form class="forms-sample" action="{% url 'operacao-financeira-saida.store' %}" method="post">
+					{% csrf_token %}
+					{% for field in form %}
+    					<div class="form-group row">
+							<label class="col-sm-3 col-form-label" for="{{ field.auto_id }}">{{ field.label }}</label>
+							<div class="col-sm-9">
+								{{ field }}
+							</div>
+    					</div>
+					{% endfor %}
+					<button type="submit" class="btn btn-primary mr-2">Gravar</button>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+{% endblock %}
