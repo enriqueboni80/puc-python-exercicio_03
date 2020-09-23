@@ -37,8 +37,8 @@ def edit(request, id):
     returnedObject = OperacaoFinanceiraEntrada.objects.filter(pk=id).values()[0]
     returnedObject['classificao_operacao'] = returnedObject.get('classificao_operacao_id')
     returnedObject['tipo_operacao'] = returnedObject.get('tipo_operacao_id')
-    returnedObject['data_recebimento'] = returnedObject['data_recebimento'].strftime("%d/%m/%Y")
-    returnedObject['data_previsao'] = returnedObject['data_previsao'].strftime("%d/%m/%Y")
+    returnedObject['data_recebimento'] = returnedObject['data_recebimento'].strftime("%d/%m/%Y") if returnedObject['data_recebimento'] is not None else  None
+    returnedObject['data_previsao'] = returnedObject['data_previsao'].strftime("%d/%m/%Y") if returnedObject['data_previsao'] is not None else  None
     form = RawOperacaoFinanceiraEntradaForm(returnedObject)
     dados = {"returnedObject": returnedObject, "form": form}
     return render(request, "operacao-financeira/entrada/edit.html", dados)

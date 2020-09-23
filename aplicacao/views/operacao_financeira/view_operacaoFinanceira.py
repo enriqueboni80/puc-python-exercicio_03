@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse, JsonResponse
 from django.template import loader
-from django.db.models import Sum
+from django.db.models import Sum, Q
 from ...models.operacaoFinanceira import (
     OperacaoFinanceira,
     OperacaoFinanceiraEntrada,
@@ -15,23 +15,43 @@ def index(request):
 
     formPesquisar = RawPesquisarPorDataForm(request.POST or None)
 
-    _dataInicio = "1900-01-01"
-    _dataFim = "3000-12-31"
+    dataInicioDefault = "1900-01-01"
+    dataFimDefault = "3000-12-31"
+    dataInicio = dataInicioDefault
+    dataFim = dataFimDefault
 
     if formPesquisar.is_valid():
         if formPesquisar.cleaned_data["data_inicio"] is not None:
             dataInicio = formPesquisar.cleaned_data["data_inicio"]
         else:
-            dataInicio = _dataInicio
-        
+            dataInicio = dataInicioDefault
+
         if formPesquisar.cleaned_data["data_fim"] is not None:
             dataFim = formPesquisar.cleaned_data["data_fim"]
         else:
-            dataFim = _dataFim
-    
+            dataFim = dataFimDefault
 
     returnedObjects = (
-        OperacaoFinanceira.objects.select_subclasses().all().order_by("-id")
+        OperacaoFinanceira.objects.select_subclasses()
+        .filter(
+            Q(
+                operacaofinanceiraentrada__data_recebimento__gte=dataInicio,
+                operacaofinanceiraentrada__data_recebimento__lte=dataFim,
+            )
+            | Q(
+                operacaofinanceiraentrada__data_previsao__gte=dataInicio,
+                operacaofinanceiraentrada__data_previsao__lte=dataFim,
+            )
+            | Q(
+                operacaofinanceirasaida__data_vencimento__gte=dataInicio,
+                operacaofinanceirasaida__data_vencimento__lte=dataFim,
+            )
+            | Q(
+                operacaofinanceirasaida__data_pagamento__gte=dataInicio,
+                operacaofinanceirasaida__data_pagamento__lte=dataFim,
+            )
+        )
+        .order_by("-id")
     )
 
     if OperacaoFinanceiraEntrada.objects.filter(situacao=Constantes.RECEBIDO).exists():
