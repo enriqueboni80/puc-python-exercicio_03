@@ -24,8 +24,8 @@ class RawOperacaoFinanceiraSaidaForm(forms.Form):
     descricao = forms.CharField(widget=forms.TextInput(attrs={'class':'form-control'}))
     classificao_operacao = forms.ModelChoiceField(queryset=ClassificacaoOperacao.objects.all(), widget=forms.Select(attrs={'class':'form-control'}))
     tipo_operacao = forms.ModelChoiceField(queryset=TipoOperacao.objects.all(), widget=forms.Select(attrs={'class':'form-control'}))
-    data_vencimento = forms.DateField(input_formats=['%d/%m/%Y'], widget=forms.TextInput(attrs={'class':'form-control', 'placeholder':'dd/mm/aaaa', 'data-mask':"00/00/0000"}), required=False)
     data_pagamento = forms.DateField(input_formats=['%d/%m/%Y'], widget=forms.TextInput(attrs={'class':'form-control', 'placeholder':'dd/mm/aaaa', 'data-mask':"00/00/0000"}), required=False)
+    data_vencimento = forms.DateField(input_formats=['%d/%m/%Y'], widget=forms.TextInput(attrs={'class':'form-control', 'placeholder':'dd/mm/aaaa', 'data-mask':"00/00/0000"}), required=False)
     situacao = forms.ChoiceField(
         choices=[
             ('1','Pago'),

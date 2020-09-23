@@ -8,9 +8,14 @@ from ...forms.rawOperacaoFinanceiraForm import RawOperacaoFinanceiraEntradaForm
 
 
 def index(request):
-    returnedObjects = OperacaoFinanceiraEntrada.objects.all().order_by('-id')
-    valorTotalEntradas =  OperacaoFinanceiraEntrada.objects.all().aggregate(Sum('valor'))['valor__sum']
-    dados = {"returnedObjectsList": returnedObjects, "valorResultado": valorTotalEntradas}
+    returnedObjects = OperacaoFinanceiraEntrada.objects.all().order_by("-id")
+    valorTotalEntradas = OperacaoFinanceiraEntrada.objects.all().aggregate(
+        Sum("valor")
+    )["valor__sum"]
+    dados = {
+        "returnedObjectsList": returnedObjects,
+        "valorResultado": valorTotalEntradas,
+    }
     return render(request, "operacao-financeira/entrada/listar.html", dados)
 
 
@@ -35,10 +40,20 @@ def show(request, id):
 
 def edit(request, id):
     returnedObject = OperacaoFinanceiraEntrada.objects.filter(pk=id).values()[0]
-    returnedObject['classificao_operacao'] = returnedObject.get('classificao_operacao_id')
-    returnedObject['tipo_operacao'] = returnedObject.get('tipo_operacao_id')
-    returnedObject['data_recebimento'] = returnedObject['data_recebimento'].strftime("%d/%m/%Y") if returnedObject['data_recebimento'] is not None else  None
-    returnedObject['data_previsao'] = returnedObject['data_previsao'].strftime("%d/%m/%Y") if returnedObject['data_previsao'] is not None else  None
+    returnedObject["classificao_operacao"] = returnedObject.get(
+        "classificao_operacao_id"
+    )
+    returnedObject["tipo_operacao"] = returnedObject.get("tipo_operacao_id")
+    returnedObject["data_recebimento"] = (
+        returnedObject["data_recebimento"].strftime("%d/%m/%Y")
+        if returnedObject["data_recebimento"] is not None
+        else None
+    )
+    returnedObject["data_previsao"] = (
+        returnedObject["data_previsao"].strftime("%d/%m/%Y")
+        if returnedObject["data_previsao"] is not None
+        else None
+    )
     form = RawOperacaoFinanceiraEntradaForm(returnedObject)
     dados = {"returnedObject": returnedObject, "form": form}
     return render(request, "operacao-financeira/entrada/edit.html", dados)
