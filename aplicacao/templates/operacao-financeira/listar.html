@@ -7,6 +7,20 @@
 			<div class="card-body">
 				<div class="row">
 					<div class="col-6"><h4 class="card-title">Relatório de entradas e saídas</h4></div>
+					<div class="col-6 row">
+						<form class="form-inline" action="{% url 'operacao-financeira.index' %}" method="post">
+							{% csrf_token %}
+							{% for field in form %}
+								<div class="input-group mb-2 mr-sm-2">
+										<div class="input-group-prepend">
+											<div class="input-group-text">{{ field.label }}</div>
+										</div>
+										{{ field }}
+								</div>
+							{% endfor %}
+								<button type="submit" class="btn btn-primary mr-2">Pesquisar</button>
+						</form>
+					</div>
 				</div>
 				<div class="col-lg-3">
 					<div class="row">

@@ -33,3 +33,7 @@ class RawOperacaoFinanceiraSaidaForm(forms.Form):
         ],
         widget=forms.Select(attrs={'class':'form-control'})
     )
+    
+class RawPesquisarPorDataForm(forms.Form):
+    data_inicio = forms.DateField(input_formats=['%d/%m/%Y'], widget=forms.TextInput(attrs={'class':'form-control', 'placeholder':'dd/mm/aaaa', 'data-mask':"00/00/0000"}), required=False)
+    data_fim = forms.DateField(input_formats=['%d/%m/%Y'], widget=forms.TextInput(attrs={'class':'form-control', 'placeholder':'dd/mm/aaaa', 'data-mask':"00/00/0000"}), required=False)
