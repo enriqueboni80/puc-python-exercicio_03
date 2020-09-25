@@ -6,15 +6,24 @@ from datetime import datetime
 from ...models.operacaoFinanceira import OperacaoFinanceiraEntrada
 from ...forms.rawOperacaoFinanceiraForm import RawOperacaoFinanceiraEntradaForm
 
+import locale
+
+locale.setlocale(locale.LC_ALL, "pt_BR.UTF-8")
+
 
 def index(request):
     returnedObjects = OperacaoFinanceiraEntrada.objects.all().order_by("-id")
     valorTotalEntradas = OperacaoFinanceiraEntrada.objects.all().aggregate(
         Sum("valor")
     )["valor__sum"]
+
+    """ Converte valor para pt-br """
+    for x in returnedObjects:
+        x.valor = locale.currency(x.valor)
+
     dados = {
         "returnedObjectsList": returnedObjects,
-        "valorResultado": valorTotalEntradas,
+        "valorResultado": locale.currency(valorTotalEntradas) if valorTotalEntradas is not None else 0.0,
     }
     return render(request, "operacao-financeira/entrada/listar.html", dados)
 
@@ -28,12 +37,14 @@ def create(request):
 def store(request):
     form = RawOperacaoFinanceiraEntradaForm(request.POST)
     if form.is_valid():
+        form.cleaned_data["valor"] = form.cleaned_data.get("valor").replace(",", ".")
         OperacaoFinanceiraEntrada.objects.create(**form.cleaned_data)
         return redirect("operacao-financeira-entrada.index")
 
 
 def show(request, id):
     returnedObject = OperacaoFinanceiraEntrada.objects.get(pk=id)
+    returnedObject.valor = locale.currency(returnedObject.valor)
     dados = {"returnedObject": returnedObject}
     return render(request, "operacao-financeira/entrada/detalhar.html", dados)
 
@@ -54,6 +65,7 @@ def edit(request, id):
         if returnedObject["data_previsao"] is not None
         else None
     )
+    returnedObject["valor"] = str(returnedObject.get("valor")).replace(".", ",")
     form = RawOperacaoFinanceiraEntradaForm(returnedObject)
     dados = {"returnedObject": returnedObject, "form": form}
     return render(request, "operacao-financeira/entrada/edit.html", dados)
@@ -63,6 +75,7 @@ def update(request, id):
     returnedObject = OperacaoFinanceiraEntrada.objects.filter(pk=id)
     form = RawOperacaoFinanceiraEntradaForm(request.POST or None)
     if form.is_valid():
+        form.cleaned_data["valor"] = form.cleaned_data.get("valor").replace(",", ".")
         returnedObject.update(**form.cleaned_data)
         return redirect("operacao-financeira-entrada.index")
 

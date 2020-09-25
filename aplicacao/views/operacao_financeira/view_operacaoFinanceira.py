@@ -10,6 +10,9 @@ from ...models.operacaoFinanceira import (
 from ...helpers.constantes import Constantes
 from ...forms.rawOperacaoFinanceiraForm import RawPesquisarPorDataForm
 
+import locale
+locale.setlocale(locale.LC_ALL, 'pt_BR.UTF-8')
+
 
 def index(request):
 
@@ -37,26 +40,24 @@ def index(request):
         dataInicio, dataFim
     )
     
+    """ Converte valor para pt-br """
+    for x in returnedObjects:
+        x.valor = locale.currency(x.valor)
+
+    
     valorTotalEntradasRecebidas = OperacaoFinanceira.objects.getSomaRecebidos(dataInicio, dataFim)
     valorTotalEntradasAReceber = OperacaoFinanceira.objects.getSomaAReceber(dataInicio, dataFim)
     valorTotalSaidasPagas = OperacaoFinanceira.objects.getSomaPagas(dataInicio, dataFim)
     valorTotalSaidasAPagar = OperacaoFinanceira.objects.getSomaAPagar(dataInicio, dataFim)
-    
-
-    valorResultado = (
-        valorTotalEntradasRecebidas
-        + valorTotalEntradasAReceber
-        - valorTotalSaidasPagas
-        - valorTotalSaidasAPagar
-    )
+    valorResultado = (float(valorTotalEntradasRecebidas) + float(valorTotalEntradasAReceber) - float(valorTotalSaidasPagas) - float(valorTotalSaidasAPagar))
 
     dados = {
         "returnedObjectsList": returnedObjects,
-        "valorResultado": valorResultado,
-        "valorTotalEntradasRecebidas": valorTotalEntradasRecebidas,
-        "valorTotalEntradasAReceber": valorTotalEntradasAReceber,
-        "valorTotalSaidasPagas": valorTotalSaidasPagas,
-        "valorTotalSaidasAPagar": valorTotalSaidasAPagar,
+        "valorResultado": locale.currency(valorResultado),
+        "valorTotalEntradasRecebidas": locale.currency(valorTotalEntradasRecebidas),
+        "valorTotalEntradasAReceber": locale.currency(valorTotalEntradasAReceber),
+        "valorTotalSaidasPagas": locale.currency(valorTotalSaidasPagas),
+        "valorTotalSaidasAPagar": locale.currency(valorTotalSaidasAPagar),
         "form": formPesquisar,
     }
     return render(request, "operacao-financeira/listar.html", dados)

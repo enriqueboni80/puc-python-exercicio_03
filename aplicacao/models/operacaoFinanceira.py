@@ -41,7 +41,7 @@ class OperacaoFinanceiraManager(InheritanceManager):
             )
             .aggregate(Sum("valor"))["valor__sum"]
         )
-        return soma if soma is not None else 0.0
+        return soma if soma is not None else 00.00
     
     def getSomaAReceber(self, dataInicio, dataFim):
         soma = (
@@ -54,7 +54,7 @@ class OperacaoFinanceiraManager(InheritanceManager):
             )
             .aggregate(Sum("valor"))["valor__sum"]
         )
-        return soma if soma is not None else 0.0
+        return soma if soma is not None else 00.00
     
     def getSomaPagas(self, dataInicio, dataFim):
         soma = (
@@ -67,7 +67,7 @@ class OperacaoFinanceiraManager(InheritanceManager):
             )
             .aggregate(Sum("valor"))["valor__sum"]
         )
-        return soma if soma is not None else 0.0
+        return soma if soma is not None else 00.00
     
     def getSomaAPagar(self, dataInicio, dataFim):
         soma = (
@@ -80,14 +80,14 @@ class OperacaoFinanceiraManager(InheritanceManager):
             )
             .aggregate(Sum("valor"))["valor__sum"]
         )
-        return soma if soma is not None else 0.0
+        return soma if soma is not None else 00.00
 
 
 class OperacaoFinanceira(models.Model):
 
     objects = OperacaoFinanceiraManager()
 
-    valor = models.FloatField(null=False)
+    valor = models.DecimalField(null=False, max_digits=11, decimal_places=2)
     descricao = models.CharField(max_length=30)
 
     classificao_operacao = models.ForeignKey(
