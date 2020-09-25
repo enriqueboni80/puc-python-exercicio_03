@@ -1,6 +1,7 @@
 from django import forms
 from ..models.classificacaoOperacao import ClassificacaoOperacao
 from ..models.tipoOperacao import TipoOperacao
+from ..helpers.constantes import Constantes
 
 
 
@@ -13,8 +14,8 @@ class RawOperacaoFinanceiraEntradaForm(forms.Form):
     data_previsao = forms.DateField(input_formats=['%d/%m/%Y'], widget=forms.TextInput(attrs={'class':'form-control', 'placeholder':'dd/mm/aaaa', 'data-mask':"00/00/0000"}), required=False)
     situacao = forms.ChoiceField(
         choices=[
-            ('1','Recebido'),
-            ('2','A Receber'),
+            (Constantes.RECEBIDO,'Recebido'),
+            (Constantes.ARECEBER,'A Receber'),
         ],
         widget=forms.Select(attrs={'class':'form-control'})
     )
@@ -29,8 +30,8 @@ class RawOperacaoFinanceiraSaidaForm(forms.Form):
     data_vencimento = forms.DateField(input_formats=['%d/%m/%Y'], widget=forms.TextInput(attrs={'class':'form-control', 'placeholder':'dd/mm/aaaa', 'data-mask':"00/00/0000"}), required=False)
     situacao = forms.ChoiceField(
         choices=[
-            ('1','Pago'),
-            ('2','A Pagar'),
+            (Constantes.PAGO,'Pago'),
+            (Constantes.APAGAR,'A Pagar'),
         ],
         widget=forms.Select(attrs={'class':'form-control'})
     )

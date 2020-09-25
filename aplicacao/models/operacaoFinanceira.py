@@ -3,6 +3,7 @@ from django.db.models import Sum, Q
 from model_utils.managers import InheritanceManager
 from .classificacaoOperacao import ClassificacaoOperacao
 from .tipoOperacao import TipoOperacao
+from ..helpers.constantes import Constantes
 
 
 class OperacaoFinanceiraManager(InheritanceManager):
@@ -35,6 +36,7 @@ class OperacaoFinanceiraManager(InheritanceManager):
             self.select_subclasses()
             .filter(
                 Q(
+                    operacaofinanceiraentrada__situacao = Constantes.RECEBIDO,
                     operacaofinanceiraentrada__data_recebimento__gte=dataInicio,
                     operacaofinanceiraentrada__data_recebimento__lte=dataFim,
                 )
@@ -48,6 +50,7 @@ class OperacaoFinanceiraManager(InheritanceManager):
             self.select_subclasses()
             .filter(
                 Q(
+                    operacaofinanceiraentrada__situacao = Constantes.ARECEBER,
                     operacaofinanceiraentrada__data_previsao__gte=dataInicio,
                     operacaofinanceiraentrada__data_previsao__lte=dataFim,
                 )
@@ -61,6 +64,7 @@ class OperacaoFinanceiraManager(InheritanceManager):
             self.select_subclasses()
             .filter(
                 Q(
+                    operacaofinanceirasaida__situacao = Constantes.PAGO,
                     operacaofinanceirasaida__data_pagamento__gte=dataInicio,
                     operacaofinanceirasaida__data_pagamento__lte=dataFim,
                 )
@@ -74,6 +78,7 @@ class OperacaoFinanceiraManager(InheritanceManager):
             self.select_subclasses()
             .filter(
                 Q(
+                    operacaofinanceirasaida__situacao = Constantes.APAGAR,
                     operacaofinanceirasaida__data_vencimento__gte=dataInicio,
                     operacaofinanceirasaida__data_vencimento__lte=dataFim,
                 )
@@ -108,8 +113,8 @@ class OperacaoFinanceiraEntrada(OperacaoFinanceira):
     data_recebimento = models.DateField(null=True)
 
     SITUACAO_CHOICES = [
-        ("1", "Recebido"),
-        ("2", "A Receber"),
+        (Constantes.RECEBIDO, "Recebido"),
+        (Constantes.ARECEBER, "A Receber"),
     ]
 
     situacao = models.CharField(max_length=2, choices=SITUACAO_CHOICES, default="1")
@@ -121,8 +126,8 @@ class OperacaoFinanceiraSaida(OperacaoFinanceira):
     data_pagamento = models.DateField(null=True)
 
     SITUACAO_CHOICES = [
-        ("1", "Pago"),
-        ("2", "A Pagar"),
+        (Constantes.PAGO, "Pago"),
+        (Constantes.APAGAR, "A Pagar"),
     ]
 
     situacao = models.CharField(max_length=2, choices=SITUACAO_CHOICES, default="1")
